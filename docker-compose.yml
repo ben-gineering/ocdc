@@ -14,7 +14,7 @@ services:
       # Project sources
       - ${HOME}/.local/src:/home/dev/.local/src
       # Opencode config
-      - ${HOME}/.config/opencode/opencode.json:/home/dev/.config/opencode/opencode.json:ro
+      - ${HOME}/.config/opencode/ocdc-opencode.json:/home/dev/.config/opencode/opencode.json:ro
       # Git config (optional but useful)
       - ${HOME}/.gitconfig:/home/dev/.gitconfig:ro
       # SSH agent socket
