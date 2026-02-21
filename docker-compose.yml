@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  opencode:
+    build: .
+    container_name: opencode-dev
+    user: "1000:1000"
+    working_dir: /home/dev/.local/src
+    environment:
+      - HOME=/home/dev
+      # Pass through SSH agent socket from host
+      - SSH_AUTH_SOCK=/ssh-agent
+    volumes:
+      # Project sources
+      - ${HOME}/.local/src:/home/dev/.local/src
+      # Opencode config
+      - ${HOME}/.config/opencode/opencode.json:/home/dev/.config/opencode/opencode.json:ro
+      # Git config (optional but useful)
+      - ${HOME}/.gitconfig:/home/dev/.gitconfig:ro
+      # SSH agent socket
+      - ${SSH_AUTH_SOCK}:/ssh-agent
+    stdin_open: true
+    tty: true
