@@ -63,5 +63,6 @@ RUN mkdir -p /home/dev/.local/share /home/dev/.config && \
     chown -R dev:dev /home/dev
 
 USER dev
-RUN echo 'set -o vi' >> /home/dev/.bashrc
+RUN echo 'set -o vi' >> /home/dev/.bashrc && \
+    echo 'export EDITOR=nvim' >> /home/dev/.bashrc
 CMD ["bash"]
