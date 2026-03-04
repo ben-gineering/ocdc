@@ -6,7 +6,7 @@ RUN pacman -Syu --noconfirm && \
       git openssh sudo bash base-devel \
       man-db man-pages which \
       zip unzip p7zip tar gzip xz \
-      wget curl htop bash-completion && \
+      wget curl htop bash-completion downgrade && \
     \
     # C/C++ toolchain and utilities
     pacman -S --noconfirm \
@@ -50,9 +50,12 @@ RUN git clone https://aur.archlinux.org/yay-bin.git /home/dev/yay-bin && \
     cd /home/dev && \
     rm -rf /home/dev/yay-bin
 
-# Install opencode from extra/opencode
+# Install opencode 1.1.53 from Arch Linux Archive
 USER root
-RUN pacman -S --noconfirm opencode && \
+RUN curl -o /tmp/opencode-1.1.53-3-x86_64.pkg.tar.zst \
+      https://archive.archlinux.org/packages/o/opencode/opencode-1.1.53-3-x86_64.pkg.tar.zst && \
+    pacman -U --noconfirm /tmp/opencode-1.1.53-3-x86_64.pkg.tar.zst && \
+    rm /tmp/opencode-1.1.53-3-x86_64.pkg.tar.zst && \
     pacman -Scc --noconfirm
 
 # Ensure dev owns its home and config/data dirs
@@ -60,4 +63,5 @@ RUN mkdir -p /home/dev/.local/share /home/dev/.config && \
     chown -R dev:dev /home/dev
 
 USER dev
+RUN echo 'set -o vi' >> /home/dev/.bashrc
 CMD ["bash"]
