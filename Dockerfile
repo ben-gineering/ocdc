@@ -6,7 +6,7 @@ RUN pacman -Syu --noconfirm && \
       git openssh sudo bash base-devel \
       man-db man-pages which \
       zip unzip p7zip tar gzip xz \
-      wget curl htop bash-completion downgrade && \
+      wget curl htop bash-completion && \
     \
     # C/C++ toolchain and utilities
     pacman -S --noconfirm \
@@ -49,6 +49,9 @@ RUN git clone https://aur.archlinux.org/yay-bin.git /home/dev/yay-bin && \
     makepkg -si --noconfirm && \
     cd /home/dev && \
     rm -rf /home/dev/yay-bin
+
+# Install downgrade AUR helper
+RUN yay -S --noconfirm downgrade
 
 # Install opencode 1.1.53 from Arch Linux Archive
 USER root
