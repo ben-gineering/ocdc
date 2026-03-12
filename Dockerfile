@@ -53,12 +53,9 @@ RUN git clone https://aur.archlinux.org/yay-bin.git /home/dev/yay-bin && \
 # Install downgrade AUR helper
 RUN yay -S --noconfirm downgrade
 
-# Install opencode 1.1.53 from Arch Linux Archive
+# Install opencode from Arch Linux extra repo
 USER root
-RUN curl -o /tmp/opencode-1.1.53-3-x86_64.pkg.tar.zst \
-      https://archive.archlinux.org/packages/o/opencode/opencode-1.1.53-3-x86_64.pkg.tar.zst && \
-    pacman -U --noconfirm /tmp/opencode-1.1.53-3-x86_64.pkg.tar.zst && \
-    rm /tmp/opencode-1.1.53-3-x86_64.pkg.tar.zst && \
+RUN pacman -S --noconfirm opencode && \
     pacman -Scc --noconfirm
 
 # Ensure dev owns its home and config/data dirs
